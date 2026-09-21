@@ -1,10 +1,8 @@
-# classic.py
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import StandardScaler
-
 
 def train_classic_models(X_train, y_train, X_test, y_test):
     scaler = StandardScaler()
