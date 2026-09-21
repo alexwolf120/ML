@@ -66,16 +66,11 @@ def train_model(model, train_loader, test_loader, head,
         history['test_loss'].append(te_loss)
         history['test_acc'].append(te_acc)
     return history
-
-
-# ============================ ЭКСПЕРИМЕНТЫ ============================
-
 def experiment_1_baseline(model, mnist_train, mnist_test, device, epochs=10):
     model.add_head('mnist')
     model.unfreeze_all()
     history = train_model(model, mnist_train, mnist_test, head='mnist',
                           epochs=epochs, device=device, tag='exp1')
-    # кривые первого эксперимента
     plot_histories([{'label': 'MNIST', 'history': history}],
                    title='Эксперимент 1: обучение MNIST',
                    filename='exp1_mnist.png')
@@ -160,18 +155,10 @@ def experiment_5_random_frozen_layers(model, fashion_train, fashion_test,
                    filename=f'exp5_fashion_frozen{n_frozen}.png')
     return history
 
-
-# ============================ ВИЗУАЛИЗАЦИЯ ============================
-
 def plot_histories(histories, title='Кривые обучения',
                    filename='plot.png', metric='both'):
-    """
-    histories: список {'label': str, 'history': dict}
-    metric: 'loss' | 'acc' | 'both'
-    """
     if metric == 'both':
         fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-        # loss
         for item in histories:
             h = item['history']
             if 'train_loss' in h:
@@ -184,8 +171,7 @@ def plot_histories(histories, title='Кривые обучения',
         axes[0].set_title('Loss')
         axes[0].legend()
         axes[0].grid(True)
-
-        # accuracy
+        
         for item in histories:
             h = item['history']
             if 'train_acc' in h:
@@ -228,7 +214,6 @@ def plot_histories(histories, title='Кривые обучения',
 
 
 def plot_summary(all_histories, filename='summary.png'):
-    """Все кривые всех экспериментов на одном графике (loss + acc)."""
     fig, axes = plt.subplots(1, 2, figsize=(18, 7))
     for item in all_histories:
         h = item['history']
