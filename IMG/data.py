@@ -7,7 +7,6 @@ import gzip
 
 
 def _open_idx(filename):
-    """Открывает idx-файл, распаковывая .gz при необходимости."""
     if filename.endswith('.gz'):
         return gzip.open(filename, 'rb')
     return open(filename, 'rb')
