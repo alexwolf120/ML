@@ -1,4 +1,3 @@
-# config.py
 import os
 
 DATA_DIR = "./data"
